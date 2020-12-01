@@ -50,7 +50,6 @@ public class ConnexionServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("utilisateur", utilisateur);
-		session.setAttribute("utilisateur", utilisateur);
 		redirect(request, response, VUE_ACCUEIL);
 	}
 

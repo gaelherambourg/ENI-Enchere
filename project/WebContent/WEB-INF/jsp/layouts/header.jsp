@@ -38,7 +38,7 @@
                         <a class="nav-link" href="#" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="#" alt="Me déconnecter">Me déconnecter</a>
+                        <a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
                         <a class="nav-link" href="register.html" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
