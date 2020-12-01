@@ -87,6 +87,36 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
+	
+	/**
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param mot_de_passe
+	 * @param administrateur
+	 */
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String code_postal, String ville, String mot_de_passe, boolean administrateur) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.mot_de_passe = mot_de_passe;
+		this.administrateur = administrateur;
+	}
+
+
+
 	public int getNo_utilisateur() {
 		return no_utilisateur;
 	}
@@ -148,13 +178,13 @@ public class Utilisateur {
 		this.mot_de_passe = mot_de_passe;
 	}
 	public int getCredit() {
-		return credit;
+		return 0;
 	}
 	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	public boolean isAdministrateur() {
-		return administrateur;
+		return false;
 	}
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
