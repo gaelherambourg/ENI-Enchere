@@ -34,6 +34,10 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("servlet");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
+		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -98,12 +102,12 @@ public class InscriptionServlet extends HttpServlet {
 			
 			try {
 				um.ajouterUtilisateur(utilisateur);
-				//RequestDispatcher rd = request.getRequestDispatcher("/accueil");
-				//rd.forward(request, response);
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/accueille.jsp");
+				rd.forward(request, response);
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
 				rd.forward(request, response);
 			}
 			
