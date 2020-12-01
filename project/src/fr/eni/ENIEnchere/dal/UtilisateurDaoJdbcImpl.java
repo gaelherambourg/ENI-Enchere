@@ -7,14 +7,15 @@ import java.sql.SQLException;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
-	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
+	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? OR email = ? AND mot_de_passe = ?";
 
 	@Override
 	public void selectByLogin(String login, String password) {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
-			pstmt.setString(2, password);
+			pstmt.setString(2, login);
+			pstmt.setString(3, password);
 			System.out.println(login);
 			System.out.println(password);
 			ResultSet rs = pstmt.executeQuery();

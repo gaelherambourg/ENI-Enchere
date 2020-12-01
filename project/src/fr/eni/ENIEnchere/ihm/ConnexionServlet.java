@@ -1,6 +1,8 @@
 package fr.eni.ENIEnchere.ihm;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.ENIEnchere.bll.UtilisateurManager;
 import fr.eni.ENIEnchere.bo.Utilisateur;
@@ -38,15 +41,18 @@ public class ConnexionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String login = request.getParameter("pseudo");
 		String mp = request.getParameter("password");
+		
 
-		UtilisateurManager um = new UtilisateurManager();
-		um.validerLogin(login, mp);
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setLogin(login);
+        UtilisateurManager um = new UtilisateurManager();
+        um.validerLogin(login, mp);
+        Utilisateur utilisateur = new Utilisateur();
+        
+        
+        utilisateur.setLogin(login);
 		utilisateur.setMotDePasse(mp);
 		
-//		HttpSession session = request.getSession();
-//		session.setAttribute("utilisateur", utilisateur);
+		HttpSession session = request.getSession();
+		session.setAttribute("utilisateur", utilisateur);
 		redirect(request, response, VUE_ACCUEIL);
 	}
 
