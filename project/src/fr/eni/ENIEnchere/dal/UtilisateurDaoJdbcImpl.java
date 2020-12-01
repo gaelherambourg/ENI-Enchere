@@ -15,15 +15,12 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
 			pstmt.setString(2, password);
+			System.out.println(login);
+			System.out.println(password);
 			ResultSet rs = pstmt.executeQuery();
 			boolean loginOk = rs.next();
 			if (loginOk) {
-				String motDePasse = rs.getString(2);
-				if (password.trim().toUpperCase().equals(motDePasse.toUpperCase())) {
-					System.out.println("Connexion réussie");
-				} else {
-					System.out.println("Identifiant ou mot de passe invalide");
-				}
+				System.out.println("Connexion réussie");
 			} else {
 				System.out.println("Login inexistant");
 			}
