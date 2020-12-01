@@ -39,7 +39,7 @@ public class InscriptionServlet extends HttpServlet {
 		rd.forward(request, response);
 		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,19 +47,19 @@ public class InscriptionServlet extends HttpServlet {
 		
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur utilisateur;
-		List<String> listeErreur = new ArrayList<String>();
 		List<Integer> listeCodesErreur=new ArrayList<>();
 				
 		String pseudo = request.getParameter("pseudo");
-		
+		if(pseudo.contains("@")) {
+			listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_EMAIL_ERREUR_CHAR);
+		}
 		try {
 			for(String pseud : um.listePseudo()) {
 				if(pseud.equals(pseudo)) {
-					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_PSEUDO_ERREUR);
+					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_PSEUDO_ERREUR);	
 				}
-				
 			}
-		} catch (BusinessException e1) {
+		}catch (BusinessException e1) {
 			e1.printStackTrace();
 		}
 			
@@ -95,7 +95,7 @@ public class InscriptionServlet extends HttpServlet {
 			request.setAttribute("rue", rue);
 			request.setAttribute("code_postal", code_postal);
 			request.setAttribute("ville", ville);
-			RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
 			rd.forward(request, response);
 		}else {
 			

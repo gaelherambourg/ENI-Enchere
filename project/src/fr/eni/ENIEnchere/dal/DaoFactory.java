@@ -5,7 +5,7 @@ public class DaoFactory {
 	public static UtilisateurDao getUtilisateurDao() {
 		
 		
-		return new UtilisateurJdbcImpl();
+		return new UtilisateurDaoJdbcImpl();
 	}
 	
 }

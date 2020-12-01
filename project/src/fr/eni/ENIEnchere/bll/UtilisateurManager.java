@@ -31,6 +31,8 @@ public class UtilisateurManager {
 			uDao.add(utilisateur);
 		} else {
 			throw businessException;
+		}
+	}
 
 
 	public void validerLogin(String login, String password) {
