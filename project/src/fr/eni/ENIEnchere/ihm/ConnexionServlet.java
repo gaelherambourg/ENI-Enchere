@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bll.UtilisateurManager;
 import fr.eni.ENIEnchere.bo.Utilisateur;
 
@@ -28,7 +29,7 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		redirect(request, response, VUE_CONNEXION_FORM);
 	}
 
@@ -38,19 +39,27 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String login = request.getParameter("pseudo");
 		String mp = request.getParameter("password");
-		
-        UtilisateurManager um = new UtilisateurManager();
-        um.validerLogin(login, mp);
-        
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setPseudo(login);
-		utilisateur.setMot_de_passe(mp);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("utilisateur", utilisateur);
-		redirect(request, response, VUE_ACCUEIL);
+
+		UtilisateurManager um = new UtilisateurManager();
+		try {
+			um.validerLogin(login, mp);
+
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setPseudo(login);
+			utilisateur.setMot_de_passe(mp);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("utilisateur", utilisateur);
+			redirect(request, response, VUE_ACCUEIL);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			request.setAttribute("listeCodeErreurs", e.getListeCodesErreur());
+			redirect(request, response, VUE_CONNEXION_FORM);
+		}
+
 	}
 
 	public void redirect(HttpServletRequest request, HttpServletResponse response, String vue)

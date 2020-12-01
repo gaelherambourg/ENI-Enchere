@@ -105,7 +105,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public void selectByLogin(String login, String password) {
+	public void selectByLogin(String login, String password) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
@@ -116,7 +116,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			if (loginOk) {
 				System.out.println("Connexion réussie");
 			} else {
-				System.out.println("Login inexistant");
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

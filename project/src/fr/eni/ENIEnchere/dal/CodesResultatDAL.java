@@ -15,4 +15,9 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int INSERT_OBJET_ECHEC=10001;
 	
+	/**
+	 * Echec général quand erreur non gérée � la v�rification login/mp 
+	 */
+	
+	public static final int VERIFI_LOGIN_ECHEC=10002;
 }
