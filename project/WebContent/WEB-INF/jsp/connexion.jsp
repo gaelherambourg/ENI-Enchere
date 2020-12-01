@@ -1,3 +1,4 @@
+<%@page import="fr.eni.ENIEnchere.messages.LecteurMessage"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -30,20 +31,6 @@
 		</div>
 	</div>
 
-	<c:if test="${not empty listeCodesErreur }">
-		<!--erreur-->
-		<div class="d-flex alert-danger">
-			<div class="col-3 p-2">
-				<img class="small-icon" src="images/error.svg">
-			</div>
-			<ul class="col-9 list-unstyled p-2">
-				<c:forEach items="${listeCodesErreur }" var="l">
-					<li>${LecteurMessage.getMessageErreur(l)}</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</c:if>
-
 
 	<!--formulaire-->
 	<form class="form-login" action="connexion" method="post">
@@ -65,7 +52,20 @@
 		<a href="#">Mot de passe oublié</a>
 	</form>
 
-
-
 	</main>
+	
+	<c:if test="${not empty listeCodesErreur }">
+		<!--erreur-->
+		<div class="d-flex alert-danger">
+			<div class="col-3 p-2">
+				<img class="small-icon" src="images/error.svg">
+			</div>
+			<ul class="col-9 list-unstyled p-2">
+				<c:forEach items="${listeCodesErreur }" var="l">
+					<li>${LecteurMessage.getMessageErreur(l)}</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</c:if>
+	
 	<%@ include file="layouts/footers.jsp"%>

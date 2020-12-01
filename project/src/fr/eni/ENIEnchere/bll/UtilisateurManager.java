@@ -32,8 +32,6 @@ public class UtilisateurManager {
 
 	public void validerLogin(String login, String password) throws BusinessException {
 
-		BusinessException businessException = new BusinessException();
-		validerEmail(login, businessException);
 		uDao.selectByLogin(login, password);
 
 	}
@@ -63,13 +61,14 @@ public class UtilisateurManager {
 		}
 	}
 
-	private void validerEmail(String email, BusinessException businessException) {
-		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-		Matcher mat = pattern.matcher(email);
-		if (mat.matches()) {
-			System.out.println("Valid email address");
-		} else {
-			businessException.ajouterErreur(CodesResultatBLL.VALID_EMAIL);
-		}
-	}
+// Méthode vérification mail
+//	private void validerEmail(String email, BusinessException businessException) {
+//		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+//		Matcher mat = pattern.matcher(email);
+//		if (mat.matches()) {
+//			System.out.println("Valid email address");
+//		} else {
+//			businessException.ajouterErreur(CodesResultatBLL.VALID_EMAIL);
+//		}
+//	}
 }

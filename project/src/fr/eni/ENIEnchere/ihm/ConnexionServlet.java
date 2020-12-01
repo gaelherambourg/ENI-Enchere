@@ -56,7 +56,7 @@ public class ConnexionServlet extends HttpServlet {
 			redirect(request, response, VUE_ACCUEIL);
 		} catch (BusinessException e) {
 			e.printStackTrace();
-			request.setAttribute("listeCodeErreurs", e.getListeCodesErreur());
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			redirect(request, response, VUE_CONNEXION_FORM);
 		}
 

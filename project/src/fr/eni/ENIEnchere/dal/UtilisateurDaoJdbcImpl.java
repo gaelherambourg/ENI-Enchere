@@ -16,7 +16,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
-	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? OR email = ? AND mot_de_passe = ?";
+	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE (pseudo = ? OR email = ?) AND mot_de_passe = ?";
 
 	@Override
 	public void add(Utilisateur utilisateur) throws BusinessException {
@@ -117,7 +117,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 				System.out.println("Connexion réussie");
 			} else {
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
 				throw businessException;
 			}
 		} catch (SQLException e) {
