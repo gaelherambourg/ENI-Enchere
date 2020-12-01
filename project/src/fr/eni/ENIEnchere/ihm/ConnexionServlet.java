@@ -28,7 +28,7 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = null;
+		
 		redirect(request, response, VUE_CONNEXION_FORM);
 	}
 
@@ -45,13 +45,11 @@ public class ConnexionServlet extends HttpServlet {
         UtilisateurManager um = new UtilisateurManager();
         um.validerLogin(login, mp);
         Utilisateur utilisateur = new Utilisateur();
-        
-        
         utilisateur.setPseudo(login);
 		utilisateur.setMot_de_passe(mp);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("pseudo", login);
+		session.setAttribute("utilisateur", utilisateur);
 		session.setAttribute("utilisateur", utilisateur);
 		redirect(request, response, VUE_ACCUEIL);
 	}

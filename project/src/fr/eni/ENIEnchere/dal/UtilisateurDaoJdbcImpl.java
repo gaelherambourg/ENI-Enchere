@@ -111,8 +111,6 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			pstmt.setString(1, login);
 			pstmt.setString(2, login);
 			pstmt.setString(3, password);
-			System.out.println(login);
-			System.out.println(password);
 			ResultSet rs = pstmt.executeQuery();
 			boolean loginOk = rs.next();
 			if (loginOk) {

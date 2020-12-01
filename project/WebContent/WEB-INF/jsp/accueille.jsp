@@ -9,7 +9,7 @@
     
     
     <!--filtre-->
-            <form class="form-filter border mb-3" action="#" method="">
+            <form class="form-filter border mb-3" action="accueil" method="">
                 <div class="row">
                     <!--Partie gauche-->
                     <div class="col-md-6 mb-3">
