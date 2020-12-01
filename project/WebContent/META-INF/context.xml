@@ -7,9 +7,9 @@
 		type = "javax.sql.DataSource"
 	
 		driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url = "jdbc:sqlserver://127.0.0.1;databasename=Shopping"
-		username = "link"
-		password = "pa$$w00rd"
+		url = "jdbc:sqlserver://127.0.0.1;databasename=ENCHERES_BDD"
+		username = "sa"
+		password = "x"
 		
 		maxTotal = "5"
 		maxIdle = "5"
