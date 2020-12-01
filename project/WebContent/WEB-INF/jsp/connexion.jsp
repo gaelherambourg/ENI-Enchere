@@ -30,7 +30,7 @@
             
             </div>
             <!--formulaire-->
-            <form class="form-login" action="#" method="">
+            <form class="form-login" action="connexion" method="post">
                 <label for="inputIdentifiant" class="sr-only">Identifiant</label>
                 <input type="text" id="inputIdentifiant" class="form-control" name="pseudo" placeholder="Pseudo" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
