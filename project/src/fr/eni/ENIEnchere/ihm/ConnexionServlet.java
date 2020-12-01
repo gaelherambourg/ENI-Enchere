@@ -41,9 +41,9 @@ public class ConnexionServlet extends HttpServlet {
 		String login = request.getParameter("pseudo");
 		String mp = request.getParameter("password");
 		
-
         UtilisateurManager um = new UtilisateurManager();
         um.validerLogin(login, mp);
+        
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setPseudo(login);
 		utilisateur.setMot_de_passe(mp);
