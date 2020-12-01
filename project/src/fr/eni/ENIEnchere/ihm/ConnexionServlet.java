@@ -19,8 +19,8 @@ import fr.eni.ENIEnchere.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VUE_ACCUEIL = "home.jsp";
-	private static final String VUE_CONNEXION_FORM = "form.jsp";
+	private static final String VUE_ACCUEIL = "/WEB-INF/jsp/accueille.jsp";
+	private static final String VUE_CONNEXION_FORM = "/WEB-INF/jsp/connexion.jsp";
 	
 
 	/**
