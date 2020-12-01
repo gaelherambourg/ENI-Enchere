@@ -1,17 +1,13 @@
 package fr.eni.ENIEnchere.bll;
 
-import fr.eni.ENIEnchere.bo.Utilisateur;
-import fr.eni.ENIEnchere.dal.DaoFactory;
-import fr.eni.ENIEnchere.dal.UtilisateurDao;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.eni.ENIEnchere.BusinessException;
+import fr.eni.ENIEnchere.bo.Utilisateur;
 import fr.eni.ENIEnchere.dal.DaoFactory;
 import fr.eni.ENIEnchere.dal.UtilisateurDao;
-
-import java.util.List;
-
-import fr.eni.ENIEnchere.BusinessException;
 
 public class UtilisateurManager {
 
@@ -31,7 +27,8 @@ public class UtilisateurManager {
 			uDao.add(utilisateur);
 		} else {
 			throw businessException;
-
+		}
+	}
 
 	public void validerLogin(String login, String password) {
 		try {

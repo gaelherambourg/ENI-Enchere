@@ -11,16 +11,16 @@ import java.util.List;
 import fr.eni.ENIEnchere.bo.Utilisateur;
 import fr.eni.ENIEnchere.BusinessException;
 
-public class UtilisateurJdbcImpl implements UtilisateurDao{
+public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	private static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
-	
+	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? OR email = ? AND mot_de_passe = ?";
+
 	@Override
-	public void add(Utilisateur utilisateur) throws BusinessException{
-		
-		
+	public void add(Utilisateur utilisateur) throws BusinessException {
+
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			PreparedStatement pstt2 = conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
 
@@ -35,7 +35,6 @@ public class UtilisateurJdbcImpl implements UtilisateurDao{
 			pstt2.setString(9, utilisateur.getMot_de_passe());
 			pstt2.setInt(10, utilisateur.getCredit());
 			pstt2.setBoolean(11, utilisateur.isAdministrateur());
-			
 
 			pstt2.executeUpdate();
 
@@ -54,15 +53,14 @@ public class UtilisateurJdbcImpl implements UtilisateurDao{
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;
 		}
-		
-		
+
 	}
 
 	@Override
-	public List<String> selectPseudo(){
-		
+	public List<String> selectPseudo() {
+
 		List<String> listePseudo = new ArrayList<String>();
-		
+
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			Statement stt = conn.createStatement();
 			ResultSet rs = stt.executeQuery(SELECT_PSEUDO);
@@ -78,16 +76,15 @@ public class UtilisateurJdbcImpl implements UtilisateurDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return listePseudo;
 	}
-	
+
 	@Override
-	public List<String> selectEmail(){
-		
+	public List<String> selectEmail() {
+
 		List<String> listeEmail = new ArrayList<String>();
-		
+
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			Statement stt = conn.createStatement();
 			ResultSet rs = stt.executeQuery(SELECT_EMAIL);
@@ -103,9 +100,29 @@ public class UtilisateurJdbcImpl implements UtilisateurDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return listeEmail;
 	}
-	
+
+	@Override
+	public void selectByLogin(String login, String password) {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
+			pstmt.setString(1, login);
+			pstmt.setString(2, login);
+			pstmt.setString(3, password);
+			System.out.println(login);
+			System.out.println(password);
+			ResultSet rs = pstmt.executeQuery();
+			boolean loginOk = rs.next();
+			if (loginOk) {
+				System.out.println("Connexion réussie");
+			} else {
+				System.out.println("Login inexistant");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
