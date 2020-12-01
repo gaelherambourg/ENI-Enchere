@@ -2,10 +2,10 @@
 
 <Context>
 
-	<Resource name="jdbc/ENI-Enchere_cnx4" type="javax.sql.DataSource"
+	<Resource name="jdbc/ENI-Enchere_cnx" type="javax.sql.DataSource"
 
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
-		url="jdbc:sqlserver://127.0.0.1;databasename=ENCHERES_BDD"
+		url="jdbc:sqlserver://DESKTOP-NT8CLE0\SQLSERVER;databasename=ENCHERES_BDD"
 		
 		username="sa"
 		password="Pauleta44" 
