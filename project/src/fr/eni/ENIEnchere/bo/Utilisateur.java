@@ -3,7 +3,11 @@ import java.io.Serializable;
 
 public class Utilisateur implements Serializable {
 
-	private String login;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String pseudo;
 	private String motDePasse;
 
 	public Utilisateur() {
@@ -11,11 +15,11 @@ public class Utilisateur implements Serializable {
 	}
 
 	public String getLogin() {
-		return login;
+		return pseudo;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
 	public String getMotDePasse() {

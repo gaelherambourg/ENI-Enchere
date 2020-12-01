@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UtilisateurDaoJdbcImpl implements UtilisateurDao{
+public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
 
 	@Override
-	public void selectByLogin(String login, String password)  {
+	public void selectByLogin(String login, String password) {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
@@ -24,6 +24,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao{
 				} else {
 					System.out.println("Identifiant ou mot de passe invalide");
 				}
+			} else {
+				System.out.println("Login inexistant");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

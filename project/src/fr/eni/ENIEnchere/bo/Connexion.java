@@ -9,6 +9,7 @@ public class Connexion {
 	public Utilisateur Connecter(HttpServletRequest request) {
 		String login = request.getParameter("pseudo");
 		String mp = request.getParameter("password");
+		System.out.println(login);
 		try {
 			UtilisateurManager um = new UtilisateurManager();
 			um.validerLogin(login, mp);

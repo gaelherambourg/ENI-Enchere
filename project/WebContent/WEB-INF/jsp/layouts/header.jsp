@@ -44,7 +44,7 @@
                         <a class="nav-link" href="register.html" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="login.html" alt="Se connecter à ENI-Encheres">Me connecter</a>
+                        <a class="nav-link" href="connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
                     </li>
                 </ul>
             </nav>

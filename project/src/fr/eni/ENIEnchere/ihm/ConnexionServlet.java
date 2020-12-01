@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.ENIEnchere.bll.UtilisateurManager;
 import fr.eni.ENIEnchere.bo.Connexion;
 import fr.eni.ENIEnchere.bo.Utilisateur;
 
@@ -38,11 +39,15 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Connexion connexion = new Connexion();
-		Utilisateur utilisateur = connexion.Connecter(request);
-
-		HttpSession session = request.getSession();
-		session.setAttribute("utilisateur", utilisateur);
+		String login = request.getParameter("pseudo");
+		String mp = request.getParameter("password");
+		
+		
+		UtilisateurManager um = new UtilisateurManager();
+		um.validerLogin(login, mp);
+		
+//		HttpSession session = request.getSession();
+//		session.setAttribute("utilisateur", utilisateur);
 		redirect(request, response, VUE_ACCUEIL);
 	}
 

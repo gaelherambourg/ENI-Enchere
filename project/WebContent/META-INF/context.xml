@@ -3,7 +3,7 @@
 <Context>
 	<Resource
 	
-		name = "jdbc/shopping_cnx"
+		name = "jdbc/ENCHERES_BDD"
 		type = "javax.sql.DataSource"
 	
 		driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
