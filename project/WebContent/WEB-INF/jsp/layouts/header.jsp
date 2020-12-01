@@ -13,7 +13,9 @@
 
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="${pageContext.request.contextPath}/images/user.svg">
-                    <span class="align-middle text-muted">${Utilisateur.pseudo }, ${Utilisateur.credit } crédit(s)</span>
+                    <c:if test="${not empty Utilisateur }">
+                    	<span class="align-middle text-muted">${Utilisateur.pseudo }, ${Utilisateur.credit } crédit(s)</span>
+                    </c:if>
                 </a>
 
                 <ul class="navbar-nav ml-auto">
@@ -23,29 +25,45 @@
                             <img class="small-icon" src="${pageContext.request.contextPath}/images/menu.svg" alt="Menu ENI-Encheres">
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" alt="Administrer le site">Administrer</a> 
-                            <a class="dropdown-item" href="#" alt="Vendre un article">Vendre un article</a>
-                            <a class="dropdown-item" href="#" alt="Me déconnecter">Me déconnecter</a>
-                            <a class="dropdown-item" href="register.html" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
-                            <a class="dropdown-item" href="login.html" alt="Se connecter à ENI-Encheres">Me connecter</a>
+                        	<c:if test="${not empty Utilisateur && Utilisateur.administrateur}">
+                            	<a class="dropdown-item" href="#" alt="Administrer le site">Administrer</a> 
+                        	</c:if>
+                        	<c:if test="${not empty Utilisateur }">
+	                            <a class="dropdown-item" href="/vente" alt="Vendre un article">Vendre un article</a>
+	                            <a class="dropdown-item" href="/deconnexion" alt="Me déconnecter">Me déconnecter</a>
+	                            <a class="dropdown-item" href="/MonProfile" alt="Bonjour"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
+                            </c:if>
+                            <c:if test="${empty Utilisateur }">
+	                            <a class="dropdown-item" href="/inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+	                            <a class="dropdown-item" href="/connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+                            </c:if>
                         </div>
                     </li>  
                     <!-- Links for medium screen-->
+                    <c:if test="${not empty Utilisateur && Utilisateur.administrateur}">
+	                    <li class="nav-item d-none d-lg-block">
+	                        <a class="nav-link" href="#" alt="Administrer le site">Administrer</a>
+	                    </li> 
+                    </c:if>
+                    <c:if test="${not empty Utilisateur }">
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="#" alt="Administrer le site">Administrer</a>
-                    </li> 
-                    <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="#" alt="Vendre un article">Vendre un article</a>
+                        <a class="nav-link" href="/connexion" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
+                        <a class="nav-link" href="/deconnexion" alt="Me déconnecter">Me déconnecter</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="register.html" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+                        <a class="nav-link" href="/MonProfile" alt="Bienvenue"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
                     </li>
-                    <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="connexion" alt="Se connecter à ENI-Encheres"><c:out value="${sessionScope.utilisateur.pseudo}" default = "Me connecter" /></a>
-                    </li>
+                    </c:if>
+                    <c:if test="${empty Utilisateur }">
+	                    <li class="nav-item d-none d-lg-block">
+	                        <a class="nav-link" href="/inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+	                    </li>
+	                    <li class="nav-item d-none d-lg-block">
+	                        <a class="nav-link" href="/connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+	                    </li>
+                    </c:if>
                 </ul>
             </nav>
         </header>
