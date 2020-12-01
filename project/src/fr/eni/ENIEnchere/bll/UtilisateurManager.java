@@ -3,6 +3,11 @@ package fr.eni.ENIEnchere.bll;
 import fr.eni.ENIEnchere.bo.Utilisateur;
 import fr.eni.ENIEnchere.dal.DaoFactory;
 import fr.eni.ENIEnchere.dal.UtilisateurDao;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import fr.eni.ENIEnchere.dal.DaoFactory;
+import fr.eni.ENIEnchere.dal.UtilisateurDao;
 
 import java.util.List;
 
@@ -26,6 +31,14 @@ public class UtilisateurManager {
 			uDao.add(utilisateur);
 		} else {
 			throw businessException;
+
+
+	public void validerLogin(String login, String password) {
+		try {
+			validerEmail(login);
+			uDao.selectByLogin(login, password);
+		} catch (Exception e) {
+
 		}
 
 	}
@@ -55,4 +68,13 @@ public class UtilisateurManager {
 		}
 	}
 
+	private void validerEmail(String email) {
+		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+		Matcher mat = pattern.matcher(email);
+		if (mat.matches()) {
+			System.out.println("Valid email address");
+		} else {
+			System.out.println("Not a valid email address");
+		}
+	}
 }
