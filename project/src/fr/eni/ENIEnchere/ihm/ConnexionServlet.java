@@ -1,8 +1,6 @@
 package fr.eni.ENIEnchere.ihm;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +28,7 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = null;
 		redirect(request, response, VUE_CONNEXION_FORM);
 	}
 
@@ -52,6 +51,7 @@ public class ConnexionServlet extends HttpServlet {
 		utilisateur.setMotDePasse(mp);
 		
 		HttpSession session = request.getSession();
+		session.setAttribute("pseudo", login);
 		session.setAttribute("utilisateur", utilisateur);
 		redirect(request, response, VUE_ACCUEIL);
 	}
