@@ -1,7 +1,15 @@
 package fr.eni.ENIEnchere.bo;
 
-public class Utilisateur {
+import java.io.Serializable;
 
+public class Utilisateur implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private int no_utilisateur;
 	private String pseudo;
 	private String nom;
@@ -114,7 +122,6 @@ public class Utilisateur {
 		this.mot_de_passe = mot_de_passe;
 		this.administrateur = administrateur;
 	}
-
 
 
 	public int getNo_utilisateur() {

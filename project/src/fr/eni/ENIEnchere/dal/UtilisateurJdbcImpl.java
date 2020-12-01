@@ -5,19 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.ENIEnchere.bo.Utilisateur;
+import fr.eni.ENIEnchere.BusinessException;
 
 public class UtilisateurJdbcImpl implements UtilisateurDao{
 
 	private static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
+	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
 	
 	@Override
-	public void add(Utilisateur utilisateur) {
+	public void add(Utilisateur utilisateur) throws BusinessException{
 		
 		
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			System.out.println("essai");
 			PreparedStatement pstt2 = conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
 
 			pstt2.setString(1, utilisateur.getPseudo());
@@ -46,9 +50,62 @@ public class UtilisateurJdbcImpl implements UtilisateurDao{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
 		}
 		
 		
 	}
 
+	@Override
+	public List<String> selectPseudo(){
+		
+		List<String> listePseudo = new ArrayList<String>();
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			Statement stt = conn.createStatement();
+			ResultSet rs = stt.executeQuery(SELECT_PSEUDO);
+
+			while (rs.next()) {
+				String pseudo = rs.getString(1);
+				listePseudo.add(pseudo);
+			}
+
+			rs.close();
+			stt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return listePseudo;
+	}
+	
+	@Override
+	public List<String> selectEmail(){
+		
+		List<String> listeEmail = new ArrayList<String>();
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			Statement stt = conn.createStatement();
+			ResultSet rs = stt.executeQuery(SELECT_EMAIL);
+
+			while (rs.next()) {
+				String email = rs.getString(1);
+				listeEmail.add(email);
+			}
+
+			rs.close();
+			stt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return listeEmail;
+	}
+	
 }

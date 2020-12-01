@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bll.BllException;
 import fr.eni.ENIEnchere.bll.UtilisateurManager;
 import fr.eni.ENIEnchere.bo.Utilisateur;
@@ -43,12 +44,36 @@ public class InscriptionServlet extends HttpServlet {
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur utilisateur;
 		List<String> listeErreur = new ArrayList<String>();
-		
-		
+		List<Integer> listeCodesErreur=new ArrayList<>();
+				
 		String pseudo = request.getParameter("pseudo");
+		
+		try {
+			for(String pseud : um.listePseudo()) {
+				if(pseud.equals(pseudo)) {
+					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_PSEUDO_ERREUR);
+				}
+				
+			}
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+		}
+			
+		
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
+		
+		try {
+			for(String mail : um.listeEmail()) {
+				if(mail.equals(email)) {
+					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_EMAIL_ERREUR);
+				}
+			}
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+		}
+		
 		String phone = request.getParameter("phone");
 		String rue = request.getParameter("rue");
 		String code_postal = request.getParameter("code_postal");
@@ -57,16 +82,35 @@ public class InscriptionServlet extends HttpServlet {
 		String confirm_password = request.getParameter("confirm_password");
 		
 		utilisateur = new Utilisateur(pseudo, nom, prenom, email, phone, rue, code_postal, ville, password, false);
-		
-		try {
-			um.ajouterUtilisateur(utilisateur);
-		} catch (BllException e) {
-			e.printStackTrace();
-			listeErreur.add(e.getMessage());
-			request.setAttribute("listeErreur", listeErreur);
+		if(listeCodesErreur.size()>0) {
+			request.setAttribute("listeCodesErreur",listeCodesErreur);
+			request.setAttribute("nom", nom);
+			request.setAttribute("prenom", prenom);
+			request.setAttribute("email", email);
+			request.setAttribute("phone", phone);
+			request.setAttribute("rue", rue);
+			request.setAttribute("code_postal", code_postal);
+			request.setAttribute("ville", ville);
 			RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
 			rd.forward(request, response);
+		}else {
+			
+			
+			try {
+				um.ajouterUtilisateur(utilisateur);
+				//RequestDispatcher rd = request.getRequestDispatcher("/accueil");
+				//rd.forward(request, response);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+				RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
+				rd.forward(request, response);
+			}
+			
 		}
+		
+		
+		
 	}
 
 }

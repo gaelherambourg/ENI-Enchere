@@ -4,25 +4,44 @@ import fr.eni.ENIEnchere.bo.Utilisateur;
 import fr.eni.ENIEnchere.dal.DaoFactory;
 import fr.eni.ENIEnchere.dal.UtilisateurDao;
 
+import java.util.List;
+
+import fr.eni.ENIEnchere.BusinessException;
+
 public class UtilisateurManager {
 
 	UtilisateurDao uDao;
-	
+
 	public UtilisateurManager() {
-		
+
 		uDao = DaoFactory.getUtilisateurDao();
 	}
-	
-	public void ajouterUtilisateur(Utilisateur utilisateur) throws BllException {
-		
-		
-		validerUtilisateur(utilisateur);
-		uDao.add(utilisateur);
-		
+
+	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
+
+		BusinessException businessException = new BusinessException();
+		validerUtilisateur(utilisateur, businessException);
+
+		if (!businessException.hasErreurs()) {
+			uDao.add(utilisateur);
+		} else {
+			throw businessException;
+		}
+
 	}
 
-	
-	private void validerUtilisateur(Utilisateur utilisateur) throws BllException {
+	public List<String> listePseudo() throws BusinessException {
+
+		return uDao.selectPseudo();
+	}
+
+	public List<String> listeEmail() throws BusinessException {
+
+		return uDao.selectEmail();
+	}
+
+	private void validerUtilisateur(Utilisateur utilisateur, BusinessException businessException)
+			throws BusinessException {
 		if (utilisateur != null && utilisateur.getNom() != null && utilisateur.getNom().trim().length() > 0
 				&& utilisateur.getPrenom() != null && utilisateur.getPrenom().trim().length() > 0
 				&& utilisateur.getEmail() != null && utilisateur.getEmail().trim().length() > 0
@@ -32,9 +51,8 @@ public class UtilisateurManager {
 				&& utilisateur.getMot_de_passe() != null && utilisateur.getMot_de_passe().trim().length() > 0) {
 
 		} else {
-			BllException ex = new BllException("L'utilisateur n'est pas correct !!");
-			throw ex;
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR);
 		}
 	}
-	
+
 }
