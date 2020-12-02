@@ -43,7 +43,6 @@ public class InscriptionServlet extends HttpServlet {
 		
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur utilisateur;
-		List<String> listeErreur = new ArrayList<String>();
 		List<Integer> listeCodesErreur=new ArrayList<>();
 				
 		String pseudo = request.getParameter("pseudo");

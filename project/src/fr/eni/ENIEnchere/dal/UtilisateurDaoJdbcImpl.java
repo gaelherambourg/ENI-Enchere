@@ -16,7 +16,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
-	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ? OR email = ? AND mot_de_passe = ?";
+	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE (pseudo = ? OR email = ?) AND mot_de_passe = ?";
 
 	@Override
 	public void add(Utilisateur utilisateur) throws BusinessException {
@@ -105,7 +105,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public void selectByLogin(String login, String password) {
+	public void selectByLogin(String login, String password) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
@@ -116,7 +116,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			if (loginOk) {
 				System.out.println("Connexion réussie");
 			} else {
-				System.out.println("Login inexistant");
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
+				throw businessException;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
