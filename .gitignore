@@ -31,3 +31,4 @@ local.properties
 project/.classpath
 project/.classpath
 project/WebContent/META-INF/context.xml
+project/WebContent/META-INF/context.xml
