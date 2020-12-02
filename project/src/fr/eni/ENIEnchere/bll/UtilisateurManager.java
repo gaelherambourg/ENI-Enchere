@@ -43,6 +43,12 @@ public class UtilisateurManager {
 		return u;
 
 	}
+	
+	
+	public void modifierUtilisateur(Utilisateur u) throws BusinessException {
+		uDao.update(u);
+	}
+	
 
 	public List<String> listePseudo() throws BusinessException {
 
