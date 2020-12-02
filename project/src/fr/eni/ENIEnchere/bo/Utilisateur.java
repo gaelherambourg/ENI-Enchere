@@ -97,7 +97,7 @@ public class Utilisateur implements Serializable {
 		this.setMot_de_passe(mot_de_passe);
 		this.setAdministrateur(administrateur);
 	}
-
+	
 	public int getNo_utilisateur() {
 		return no_utilisateur;
 	}
@@ -227,7 +227,4 @@ public class Utilisateur implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
 }
