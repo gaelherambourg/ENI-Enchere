@@ -1,8 +1,6 @@
 package fr.eni.ENIEnchere.bll;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bo.Utilisateur;
@@ -31,18 +29,17 @@ public class UtilisateurManager {
 		}
 	}
 
-
 	public Utilisateur recupereUtilisateur(String login, String password) throws BusinessException {
-		
+
 		Utilisateur u = uDao.selectByLogin(login, password);
-		
-		if (u== null) {
+
+		if (u == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
 			throw businessException;
 		}
-		//validerUtilisateur(u, new BusinessException());
-		
+		// validerUtilisateur(u, new BusinessException());
+
 		return u;
 
 	}
@@ -55,6 +52,10 @@ public class UtilisateurManager {
 	public List<String> listeEmail() throws BusinessException {
 
 		return uDao.selectEmail();
+	}
+
+	public void supprimerUtilisateur(int id) throws BusinessException {
+		uDao.delete(id);
 	}
 
 	private void validerUtilisateur(Utilisateur utilisateur, BusinessException businessException)
@@ -72,14 +73,4 @@ public class UtilisateurManager {
 		}
 	}
 
-// M�thode v�rification mail
-//	private void validerEmail(String email, BusinessException businessException) {
-//		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-//		Matcher mat = pattern.matcher(email);
-//		if (mat.matches()) {
-//			System.out.println("Valid email address");
-//		} else {
-//			businessException.ajouterErreur(CodesResultatBLL.VALID_EMAIL);
-//		}
-//	}
 }
