@@ -16,7 +16,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
-	private static final String SELECT_BY_LOGIN = "SELECT no_utilisateur FROM UTILISATEURS WHERE (pseudo = ? OR email = ?) AND mot_de_passe = ?";
+	private static final String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE (pseudo = ? OR email = ?) AND mot_de_passe = ?";
 
 	@Override
 	public void add(Utilisateur utilisateur) throws BusinessException {
@@ -105,24 +105,24 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public void selectByLogin(String login, String password) throws BusinessException {
+	public Utilisateur selectByLogin(String login, String password) throws BusinessException {
+		
+		Utilisateur u = null;
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOGIN)) {
 			pstmt.setString(1, login);
 			pstmt.setString(2, login);
 			pstmt.setString(3, password);
 			ResultSet rs = pstmt.executeQuery();
-			boolean loginOk = rs.next();
-			if (loginOk) {
-				System.out.println("Connexion r�ussie");
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
-				throw businessException;
+			while (rs.next()) {
+				System.out.println("Connexion réussie");
+				u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getBoolean(12));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return u;
 	}
 	
 }

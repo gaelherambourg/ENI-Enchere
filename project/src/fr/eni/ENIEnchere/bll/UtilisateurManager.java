@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bo.Utilisateur;
+import fr.eni.ENIEnchere.dal.CodesResultatDAL;
 import fr.eni.ENIEnchere.dal.DaoFactory;
 import fr.eni.ENIEnchere.dal.UtilisateurDao;
 
@@ -30,9 +31,19 @@ public class UtilisateurManager {
 		}
 	}
 
-	public void validerLogin(String login, String password) throws BusinessException {
 
-		uDao.selectByLogin(login, password);
+	public Utilisateur recupereUtilisateur(String login, String password) throws BusinessException {
+		
+		Utilisateur u = uDao.selectByLogin(login, password);
+		
+		if (u== null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
+			throw businessException;
+		}
+		//validerUtilisateur(u, new BusinessException());
+		
+		return u;
 
 	}
 
@@ -61,7 +72,7 @@ public class UtilisateurManager {
 		}
 	}
 
-// Méthode vérification mail
+// Mï¿½thode vï¿½rification mail
 //	private void validerEmail(String email, BusinessException businessException) {
 //		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
 //		Matcher mat = pattern.matcher(email);

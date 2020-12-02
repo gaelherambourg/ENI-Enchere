@@ -21,8 +21,8 @@ public class DeconnexionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		try {
 			session.invalidate();
-			request.getRequestDispatcher("/WEB-INF/jsp/accueille.jsp").forward(request, response);
-			System.out.println("Deconnexion réussie");
+			response.sendRedirect(request.getContextPath());
+			System.out.println("Deconnexion rÃ©ussie");
 		} catch (Exception e) {
 			System.out.println("Erreur destruction session");
 		}

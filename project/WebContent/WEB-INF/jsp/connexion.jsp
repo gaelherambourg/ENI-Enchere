@@ -10,7 +10,7 @@
         <header>
             <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
                 <!-- Brand/logo -->
-                <a class="navbar-brand" href="/acceuille">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}">
                     <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
                     <strong>ENI-Encheres</strong>
                 </a>
@@ -25,8 +25,10 @@
 				alt="">
 		</div>
 	</div>
-
-
+	
+	<!-- Erreur -->
+		<%@ include file="layouts/error.jsp"%>
+		
 	<!--formulaire-->
 	<form class="form-login" action="connexion" method="post">
 		<label for="inputIdentifiant" class="sr-only">Identifiant</label> <input
@@ -44,23 +46,11 @@
 			title="Me connecter">
 			<img class="small-icon" src="images/connect.svg" alt="Me connecter">
 		</button>
-		<a href="#">Mot de passe oubliï¿½</a>
+		<a href="#">Mot de passe oublié</a>
 	</form>
 
 	</main>
 	
-	<c:if test="${not empty listeCodesErreur }">
-		<!--erreur-->
-		<div class="d-flex alert-danger">
-			<div class="col-3 p-2">
-				<img class="small-icon" src="images/error.svg">
-			</div>
-			<ul class="col-9 list-unstyled p-2">
-				<c:forEach items="${listeCodesErreur }" var="l">
-					<li>${LecteurMessage.getMessageErreur(l)}</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</c:if>
+
 	
 	<%@ include file="layouts/footers.jsp"%>

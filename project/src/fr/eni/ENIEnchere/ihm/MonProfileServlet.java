@@ -13,13 +13,13 @@ import fr.eni.ENIEnchere.bo.Utilisateur;
  * Servlet implementation class MonProfil
  */
 @WebServlet("/MonProfile")
-public class MonProfile extends HttpServlet {
+public class MonProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MonProfile() {
+    public MonProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

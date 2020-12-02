@@ -41,21 +41,16 @@ public class ConnexionServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String login = request.getParameter("pseudo");
-		String mp = request.getParameter("password");
+		String password = request.getParameter("password");
 
 		UtilisateurManager um = new UtilisateurManager();
 		try {
-			um.validerLogin(login, mp);
-
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setPseudo(login);
-			utilisateur.setMot_de_passe(mp);
 
 			HttpSession session = request.getSession();
-			session.setAttribute("utilisateur", utilisateur);
-			redirect(request, response, VUE_ACCUEIL);
+			session.setAttribute("utilisateur", um.recupereUtilisateur(login, password));
+			response.sendRedirect(request.getContextPath());
 		} catch (BusinessException e) {
-			e.printStackTrace();
+			System.out.println("Erreur lors de la récupération de l'utilisateur");
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			redirect(request, response, VUE_CONNEXION_FORM);
 		}

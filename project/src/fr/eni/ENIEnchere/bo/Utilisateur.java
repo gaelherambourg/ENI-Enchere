@@ -20,8 +20,8 @@ public class Utilisateur implements Serializable {
 	private String code_postal;
 	private String ville;
 	private String mot_de_passe;
-	private int credit;	
-	private boolean administrateur;
+	private int credit=0;	
+	private boolean administrateur = false;
 	
 	
 	/**
@@ -46,18 +46,9 @@ public class Utilisateur implements Serializable {
 	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
-		this.credit = credit;
-		this.administrateur = administrateur;
+
+		this(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur);
+		this.setCredit(credit);
 	}
 
 	/**
@@ -76,19 +67,9 @@ public class Utilisateur implements Serializable {
 	 */
 	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
-		this.no_utilisateur = no_utilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
-		this.credit = credit;
-		this.administrateur = administrateur;
+		
+		this(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur);
+		this.setNo_utilisateur(no_utilisateur);
 	}
 
 	/**
@@ -105,17 +86,16 @@ public class Utilisateur implements Serializable {
 	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, boolean administrateur) {
-		super();
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
-		this.administrateur = administrateur;
+		this.setPseudo(pseudo);
+		this.setNom(prenom);
+		this.setPrenom(prenom);
+		this.setEmail(email);
+		this.setTelephone(telephone);
+		this.setRue(rue);
+		this.setCode_postal(code_postal);
+		this.setVille(ville);
+		this.setMot_de_passe(mot_de_passe);
+		this.setAdministrateur(administrateur);
 	}
 
 	public int getNo_utilisateur() {
@@ -199,15 +179,18 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public int getCredit() {
-		return 0;
+		return this.credit;
 	}
 	
 	public void setCredit(int credit) {
 		this.credit = credit;
+		if (this.credit<0) {
+			this.credit = 0;
+		}
 	}
 	
 	public boolean isAdministrateur() {
-		return false;
+		return this.administrateur;
 	}
 	
 	public void setAdministrateur(boolean administrateur) {
