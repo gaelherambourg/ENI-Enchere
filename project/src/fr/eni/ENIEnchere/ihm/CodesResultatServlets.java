@@ -37,6 +37,10 @@ public abstract class CodesResultatServlets {
 	 * Format Utilisateur.mot_de_passe incorrect
 	 */
 	public static final int FORMAT_UTILISATEUR_MOT_DE_PASSE_ERREUR=30007;
+	/**
+	 * Format Utilisateur.email contient un @
+	 */
+	public static final Integer FORMAT_UTILISATEUR_EMAIL_ERREUR_CHAR = 30008;
 	
 	
 }

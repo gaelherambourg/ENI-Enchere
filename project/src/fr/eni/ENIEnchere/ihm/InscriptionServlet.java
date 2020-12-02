@@ -34,8 +34,12 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("servlet");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
+		rd.forward(request, response);
+		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,15 +50,16 @@ public class InscriptionServlet extends HttpServlet {
 		List<Integer> listeCodesErreur=new ArrayList<>();
 				
 		String pseudo = request.getParameter("pseudo");
-		
+		if(pseudo.contains("@")) {
+			listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_EMAIL_ERREUR_CHAR);
+		}
 		try {
 			for(String pseud : um.listePseudo()) {
 				if(pseud.equals(pseudo)) {
-					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_PSEUDO_ERREUR);
+					listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_PSEUDO_ERREUR);	
 				}
-				
 			}
-		} catch (BusinessException e1) {
+		}catch (BusinessException e1) {
 			e1.printStackTrace();
 		}
 			
@@ -90,19 +95,19 @@ public class InscriptionServlet extends HttpServlet {
 			request.setAttribute("rue", rue);
 			request.setAttribute("code_postal", code_postal);
 			request.setAttribute("ville", ville);
-			RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
 			rd.forward(request, response);
 		}else {
 			
 			
 			try {
 				um.ajouterUtilisateur(utilisateur);
-				//RequestDispatcher rd = request.getRequestDispatcher("/accueil");
-				//rd.forward(request, response);
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/accueille.jsp");
+				rd.forward(request, response);
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("inscription.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
 				rd.forward(request, response);
 			}
 			

@@ -11,10 +11,10 @@
                     <strong>ENI-Encheres</strong>
                 </a>
 
-                <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
+                <a class="navbar-brand" href="#" alt="Gï¿½rer mon profil" title="Gï¿½rer mon profil">
                     <img class="small-icon" src="${pageContext.request.contextPath}/images/user.svg">
                     <c:if test="${not empty Utilisateur }">
-                    	<span class="align-middle text-muted">${Utilisateur.pseudo }, ${Utilisateur.credit } crédit(s)</span>
+                    	<span class="align-middle text-muted">${Utilisateur.pseudo }, ${Utilisateur.credit } crï¿½dit(s)</span>
                     </c:if>
                 </a>
 
@@ -30,12 +30,12 @@
                         	</c:if>
                         	<c:if test="${not empty Utilisateur }">
 	                            <a class="dropdown-item" href="vente" alt="Vendre un article">Vendre un article</a>
-	                            <a class="dropdown-item" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
+	                            <a class="dropdown-item" href="deconnexion" alt="Me dï¿½connecter">Me dï¿½connecter</a>
 	                            <a class="dropdown-item" href="MonProfile" alt="Bonjour"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
                             </c:if>
                             <c:if test="${empty Utilisateur }">
-	                            <a class="dropdown-item" href="inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
-	                            <a class="dropdown-item" href="connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+	                            <a class="dropdown-item" href="inscription" alt="S'inscrire ï¿½ ENI-Encheres">M'inscrire</a>
+	                            <a class="dropdown-item" href="connexion" alt="Se connecter ï¿½ ENI-Encheres">Me connecter</a>
                             </c:if>
                         </div>
                     </li>  
@@ -50,7 +50,7 @@
                         <a class="nav-link" href="connexion" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
+                        <a class="nav-link" href="deconnexion" alt="Me dï¿½connecter">Me dï¿½connecter</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
                         <a class="nav-link" href="MonProfile" alt="Bienvenue"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
@@ -58,10 +58,10 @@
                     </c:if>
                     <c:if test="${empty Utilisateur }">
 	                    <li class="nav-item d-none d-lg-block">
-	                        <a class="nav-link" href="inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+	                        <a class="nav-link" href="inscription" alt="S'inscrire ï¿½ ENI-Encheres">M'inscrire</a>
 	                    </li>
 	                    <li class="nav-item d-none d-lg-block">
-	                        <a class="nav-link" href="connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+	                        <a class="nav-link" href="connexion" alt="Se connecter ï¿½ ENI-Encheres">Me connecter</a>
 	                    </li>
                     </c:if>
                 </ul>
