@@ -29,13 +29,13 @@
                             	<a class="dropdown-item" href="#" alt="Administrer le site">Administrer</a> 
                         	</c:if>
                         	<c:if test="${not empty Utilisateur }">
-	                            <a class="dropdown-item" href="/vente" alt="Vendre un article">Vendre un article</a>
-	                            <a class="dropdown-item" href="/deconnexion" alt="Me déconnecter">Me déconnecter</a>
-	                            <a class="dropdown-item" href="/MonProfile" alt="Bonjour"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
+	                            <a class="dropdown-item" href="vente" alt="Vendre un article">Vendre un article</a>
+	                            <a class="dropdown-item" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
+	                            <a class="dropdown-item" href="MonProfile" alt="Bonjour"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
                             </c:if>
                             <c:if test="${empty Utilisateur }">
-	                            <a class="dropdown-item" href="/inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
-	                            <a class="dropdown-item" href="/connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+	                            <a class="dropdown-item" href="inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+	                            <a class="dropdown-item" href="connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
                             </c:if>
                         </div>
                     </li>  
@@ -47,21 +47,21 @@
                     </c:if>
                     <c:if test="${not empty Utilisateur }">
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="/connexion" alt="Vendre un article">Vendre un article</a>
+                        <a class="nav-link" href="connexion" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="/deconnexion" alt="Me déconnecter">Me déconnecter</a>
+                        <a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="/MonProfile" alt="Bienvenue"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
+                        <a class="nav-link" href="MonProfile" alt="Bienvenue"><c:out value="${Utilisateur.pseudo }" default="&#128540;"></c:out></a>
                     </li>
                     </c:if>
                     <c:if test="${empty Utilisateur }">
 	                    <li class="nav-item d-none d-lg-block">
-	                        <a class="nav-link" href="/inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
+	                        <a class="nav-link" href="inscription" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
 	                    </li>
 	                    <li class="nav-item d-none d-lg-block">
-	                        <a class="nav-link" href="/connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
+	                        <a class="nav-link" href="connexion" alt="Se connecter à ENI-Encheres">Me connecter</a>
 	                    </li>
                     </c:if>
                 </ul>
