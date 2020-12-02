@@ -17,6 +17,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE (pseudo = ? OR email = ?) AND mot_de_passe = ?";
+	private static final String UPDATE_USER = "UPDATE UTILISATEURS set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?;";
 
 	@Override
 	public void add(Utilisateur utilisateur) throws BusinessException {
@@ -123,6 +124,36 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 		}
 		
 		return u;
+	}
+
+	@Override
+	public void update(Utilisateur utilisateur) throws BusinessException {
+
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			PreparedStatement pstt2 = conn.prepareStatement(UPDATE_USER);
+
+			pstt2.setString(1, utilisateur.getPseudo());
+			pstt2.setString(2, utilisateur.getNom());
+			pstt2.setString(3, utilisateur.getPrenom());
+			pstt2.setString(4, utilisateur.getEmail());
+			pstt2.setString(5, utilisateur.getTelephone());
+			pstt2.setString(6, utilisateur.getRue());
+			pstt2.setString(7, utilisateur.getCode_postal());
+			pstt2.setString(8, utilisateur.getVille());
+			pstt2.setString(9, utilisateur.getMot_de_passe());
+			pstt2.setInt(10, utilisateur.getNo_utilisateur());
+			pstt2.executeUpdate();
+
+			pstt2.close();
+			conn.commit();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+		
 	}
 	
 }
