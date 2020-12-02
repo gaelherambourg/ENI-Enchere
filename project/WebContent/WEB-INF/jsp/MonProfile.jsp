@@ -118,7 +118,7 @@
 				      </div>
 				      <div class="modal-footer">
 						  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-						 <a href="${pageContext.request.contextPath}"> <button type="button" class="btn btn-danger">Suprimer</button> </a>
+						 <a href="supprimer"> <button type="button" class="btn btn-danger">Suprimer</button> </a>
 				      </div>
 				    </div>
 				  </div>

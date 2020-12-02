@@ -26,6 +26,7 @@ public class SupprimerCompteServlet extends HttpServlet {
 		UtilisateurManager um = new UtilisateurManager();
 		try {
 			um.supprimerUtilisateur(u.getNo_utilisateur());
+			session.invalidate();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
