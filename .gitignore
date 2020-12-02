@@ -7,7 +7,7 @@ target/**
 /build/
 
 # eclipse specific
-context.xml
+*/context.xml
 *.pydevproject
 .project
 .metadata
