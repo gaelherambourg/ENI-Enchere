@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bll.BllException;
@@ -34,7 +35,6 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("servlet");
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inscription.jsp");
 		rd.forward(request, response);
 		
@@ -99,11 +99,11 @@ public class InscriptionServlet extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			
-			
 			try {
 				um.ajouterUtilisateur(utilisateur);
-				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/accueille.jsp");
-				rd.forward(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("utilisateur", utilisateur);
+				response.sendRedirect(request.getContextPath());
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
@@ -112,8 +112,6 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			
 		}
-		
-		
 		
 	}
 
