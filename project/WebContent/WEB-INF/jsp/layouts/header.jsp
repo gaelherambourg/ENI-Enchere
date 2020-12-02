@@ -56,13 +56,13 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.utilisateur }">
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="connexion" alt="Vendre un article">Vendre un article</a>
+                        <a class="nav-link" href="afficherUtilisateur" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
                     	<a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="MonProfile" alt="Bienvenue"><c:out value="${sessionScope.utilisateur.pseudo }" default="&#128540;"></c:out></a>
+                        <a class="nav-link" href="afficherUtilisateur" alt="Bienvenue"><c:out value="${sessionScope.utilisateur.pseudo }" default="&#128540;"></c:out></a>
                     </li>
                     </c:if>
                     <c:if test="${empty sessionScope.utilisateur }">

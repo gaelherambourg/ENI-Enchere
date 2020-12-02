@@ -11,4 +11,5 @@ public interface UtilisateurDao {
 	List<String> selectPseudo() throws BusinessException;
 	List<String> selectEmail();
 	Utilisateur selectByLogin(String login, String password) throws BusinessException;
+	Utilisateur selectByPseudo(String pseudo) throws BusinessException;
 }

@@ -72,6 +72,11 @@ public class UtilisateurManager {
 		}
 	}
 
+	public Utilisateur trouverUtilisateurParPseudo(String pseudo) throws BusinessException {
+		
+		return uDao.selectByPseudo(pseudo);
+	}
+	
 // M�thode v�rification mail
 //	private void validerEmail(String email, BusinessException businessException) {
 //		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
