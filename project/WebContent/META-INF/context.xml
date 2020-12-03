@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	<Resource
+	
+		name = "jdbc/ENCHERES_BDD"
+		type = "javax.sql.DataSource"
+	
+		driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		url = "jdbc:sqlserver://localhost;databasename=ENCHERES_BDD"
+		username = "sa"
+		password = "x"
+		
+		maxTotal = "5"
+		maxIdle = "5"
+		maxWaitMillis = "10000"
+	
+	/>
+
+</Context>

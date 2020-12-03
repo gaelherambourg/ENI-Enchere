@@ -7,6 +7,7 @@ target/**
 /build/
 
 # eclipse specific
+*/context.xml
 *.pydevproject
 .project
 .metadata
@@ -27,3 +28,7 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+project/.classpath
+project/.classpath
+project/WebContent/META-INF/context.xml
+project/WebContent/META-INF/context.xml
