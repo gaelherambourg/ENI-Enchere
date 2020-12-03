@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bll.UtilisateurManager;
-import fr.eni.ENIEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class Connexion
@@ -20,7 +19,6 @@ import fr.eni.ENIEnchere.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VUE_ACCUEIL = "/WEB-INF/jsp/accueille.jsp";
 	private static final String VUE_CONNEXION_FORM = "/WEB-INF/jsp/connexion.jsp";
 
 	/**
@@ -50,7 +48,7 @@ public class ConnexionServlet extends HttpServlet {
 			session.setAttribute("utilisateur", um.recupereUtilisateur(login, password));
 			response.sendRedirect(request.getContextPath());
 		} catch (BusinessException e) {
-			System.out.println("Erreur lors de la récupération de l'utilisateur");
+			System.out.println("Erreur lors de la récupération de ok l'utilisateur");
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			redirect(request, response, VUE_CONNEXION_FORM);
 		}

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.ENIEnchere.BusinessException;
-import fr.eni.ENIEnchere.bll.BllException;
 import fr.eni.ENIEnchere.bll.UtilisateurManager;
 import fr.eni.ENIEnchere.bo.Utilisateur;
 
@@ -83,7 +82,6 @@ public class InscriptionServlet extends HttpServlet {
 		String code_postal = request.getParameter("code_postal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("password");
-		String confirm_password = request.getParameter("confirm_password");
 		
 		utilisateur = new Utilisateur(pseudo, nom, prenom, email, phone, rue, code_postal, ville, password, false);
 		if(listeCodesErreur.size()>0) {
