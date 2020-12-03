@@ -7,7 +7,7 @@
 
 
 
-		<form action="MonProfile" method="post">
+		<form action="MonProfile" method="get">
 			<div class="col-md-2 mx-auto" style="margin-top: 100px">
 				<div class="tab-content profile-tab" id="myTabContent">
 					<div class="tab-pane fade show active" id="home" role="tabpanel"

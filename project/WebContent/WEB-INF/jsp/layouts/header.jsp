@@ -40,7 +40,7 @@
                         	<c:if test="${not empty sessionScope.utilisateur }">
 	                            <a class="dropdown-item" href="vente" alt="Vendre un article">Vendre un article</a>
 	                            <a class="dropdown-item" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>
-	                            <a class="dropdown-item" href="MonProfile" alt="Bonjour"><c:out value="${sessionScope.utilisateur.pseudo }" default="&#128540;"></c:out></a>
+	                            <a class="dropdown-item" href="afficherUtilisateur" alt="Bonjour"><c:out value="${sessionScope.utilisateur.pseudo }" default="&#128540;"></c:out></a>
                             </c:if>
                             <c:if test="${empty sessionScope.utilisateur }">
 	                            <a class="dropdown-item" href="inscription" alt="S'inscrire ENI-Encheres">M'inscrire</a>
@@ -56,7 +56,7 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.utilisateur }">
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="afficherUtilisateur" alt="Vendre un article">Vendre un article</a>
+                        <a class="nav-link" href="vente" alt="Vendre un article">Vendre un article</a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
                     	<a class="nav-link" href="deconnexion" alt="Me déconnecter">Me déconnecter</a>

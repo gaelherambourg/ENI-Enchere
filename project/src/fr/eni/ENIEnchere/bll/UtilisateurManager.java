@@ -41,7 +41,7 @@ public class UtilisateurManager {
 		// validerUtilisateur(u, new BusinessException());
 
 		return u;
-
+		
 	}
 	
 	

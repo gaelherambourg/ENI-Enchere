@@ -31,7 +31,6 @@ public class AfficherUtilisateurServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
-		System.out.println(u.toString());
 		
 		if(pseudo == null) {
 			
