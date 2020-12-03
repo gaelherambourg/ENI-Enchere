@@ -11,7 +11,7 @@
                     <strong>ENI-Encheres</strong>
                 </a>
 
-                <a class="navbar-brand" href="Profile" alt="Gérer mon profil" title="Gérer mon profil">
+                <a class="navbar-brand" href="afficherUtilisateur" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="${pageContext.request.contextPath}/images/user.svg">
                     <c:if test="${not empty sessionScope.utilisateur }">
                     	<span class="align-middle text-muted">${sessionScope.utilisateur.pseudo }, ${sessionScope.utilisateur.credit } 
