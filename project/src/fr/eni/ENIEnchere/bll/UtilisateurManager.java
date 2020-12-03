@@ -1,8 +1,6 @@
 package fr.eni.ENIEnchere.bll;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import fr.eni.ENIEnchere.BusinessException;
 import fr.eni.ENIEnchere.bo.Utilisateur;
@@ -31,21 +29,26 @@ public class UtilisateurManager {
 		}
 	}
 
-
 	public Utilisateur recupereUtilisateur(String login, String password) throws BusinessException {
-		
+
 		Utilisateur u = uDao.selectByLogin(login, password);
-		
-		if (u== null) {
+
+		if (u == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.VERIFI_LOGIN_ECHEC);
 			throw businessException;
 		}
-		//validerUtilisateur(u, new BusinessException());
-		
+		// validerUtilisateur(u, new BusinessException());
+
 		return u;
 
 	}
+	
+	
+	public void modifierUtilisateur(Utilisateur u) throws BusinessException {
+		uDao.update(u);
+	}
+	
 
 	public List<String> listePseudo() throws BusinessException {
 
@@ -55,6 +58,10 @@ public class UtilisateurManager {
 	public List<String> listeEmail() throws BusinessException {
 
 		return uDao.selectEmail();
+	}
+
+	public void supprimerUtilisateur(int id) throws BusinessException {
+		uDao.delete(id);
 	}
 
 	private void validerUtilisateur(Utilisateur utilisateur, BusinessException businessException)
