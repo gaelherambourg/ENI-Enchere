@@ -22,7 +22,7 @@ public class DeconnexionServlet extends HttpServlet {
 		try {
 			session.invalidate();
 			response.sendRedirect(request.getContextPath());
-			System.out.println("Deconnexion réussie");
+			System.out.println("Deconnexion réussie !!");
 		} catch (Exception e) {
 			System.out.println("Erreur destruction session");
 		}
